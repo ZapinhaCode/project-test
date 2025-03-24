@@ -23,6 +23,11 @@ class ProdutoController extends Controller
     }
 
     public function store(Request $request) {
+        $validated = $request->validate([
+            'nome' => 'required|string|max:255',
+            'preco' => 'required|numeric',
+        ]);
+
         try {
             DB::beginTransaction();
             $produto = new Produto();
